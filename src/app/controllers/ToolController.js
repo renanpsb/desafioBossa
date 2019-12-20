@@ -29,17 +29,9 @@ class ToolController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    // retornar o objeto todo
-    const {
-      id,
-      title,
-      link,
-      description,
-      tags,
-      // eslint-disable-next-line indent
-    } = await Tool.create(req.body);
+    const tool = await Tool.create(req.body);
 
-    return res.status(201).json(id, title, link, description, tags);
+    return res.status(201).json(tool);
   }
 
   async delete(req, res) {

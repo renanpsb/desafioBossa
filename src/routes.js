@@ -15,7 +15,7 @@ routes.post('/users', UserControler.store);
 
 routes.post('/login', SessionController.store);
 
-// routes.use(authMiddleware);
+routes.use(authMiddleware);
 
 routes.get('/tools', ToolController.index);
 routes.post('/tools', ToolController.store);
