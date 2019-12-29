@@ -10,6 +10,13 @@ const swaggerOptions = {
       contact: {
         name: 'Renan Pelegrini Sebben',
       },
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
       servers: ['http://localhost:3000'],
     },
   },

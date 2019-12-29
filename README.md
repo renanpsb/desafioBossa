@@ -25,13 +25,17 @@ Para inicializar a api em modo de desenvolvimento rodar o comando
 yarn server
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+### Documentação
+
+```
+http://localhost:3000/api-docs
+```
 
 ## Desenvolvido com
 
 - [Node.Js](https://nodejs.org)
-- [Express](https://expressjs.com/) - The web framework used
+- [Express](https://expressjs.com/)
 
 ## Licença
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+Este projeto está licenciado sob a licença MIT - consulte o arquivo [LICENSE.md](LICENSE.md) para obter detalhes

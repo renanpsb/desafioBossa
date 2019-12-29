@@ -20,6 +20,7 @@ routes.get('/', (req, res) => {
  *    description: Usado para criar um novo usuário.
  *    parameters:
  *    - in: body
+ *      name: body
  *      description: Atributos do usuário a ser cadastrado.
  *      required: true
  *      schema:
@@ -27,6 +28,8 @@ routes.get('/', (req, res) => {
  *    responses:
  *      '201':
  *        description: Usuário criado com sucesso.
+ *      '400':
+ *        description: Falha na validação dos parametros
  */
 routes.post('/users', UserControler.store);
 
@@ -39,6 +42,7 @@ routes.post('/users', UserControler.store);
  *    description: Usado para receber um token de autenticação.
  *    parameters:
  *    - in: body
+ *      name: body
  *      description: Usuário e senha para autenticação
  *      required: true
  *      schema:
@@ -46,6 +50,8 @@ routes.post('/users', UserControler.store);
  *    responses:
  *      '200':
  *        description: Usuário verificado com sucesso.
+ *      '400':
+ *        description: Falha na validação dos parametros
  */
 routes.post('/login', SessionController.store);
 
@@ -61,15 +67,29 @@ routes.use(authMiddleware);
  *    responses:
  *      '200':
  *        description: Requisição respondida com sucesso.
+ *      '401':
+ *        description: Falha de autorização.
+ *    security:
+ *    - Bearer: []
  *
  * /tools?tag={tag}:
  *  get:
  *    tags:
  *    - tools
  *    description: Busca ferramentas que contém uma tag especifica.
+ *    parameters:
+ *    - name: tag
+ *      in: path
+ *      description: Ferramentas que contem está tag.
+ *      required: true
+ *      type: string
  *    responses:
  *      '200':
  *        description: Requisição respondida com sucesso.
+ *      '401':
+ *        description: Falha de autorização.
+ *    security:
+ *    - Bearer: []
  */
 routes.get('/tools', ToolController.index);
 
@@ -82,6 +102,7 @@ routes.get('/tools', ToolController.index);
  *    description: Cria uma nova ferramenta
  *    parameters:
  *    - in: body
+ *      name: body
  *      schema:
  *       $ref: '#definitions/Tool'
  *    responses:
@@ -91,19 +112,34 @@ routes.get('/tools', ToolController.index);
  *        description: Ferramenta criada com sucesso.
  *      '400':
  *        description: Falha na validação dos parametros
+ *      '401':
+ *        description: Falha de autorização.
+ *    security:
+ *    - Bearer: []
  */
 routes.post('/tools', ToolController.store);
 
 /**
  * @swagger
- * /tools/{toolId}:
+ * /tools/{tool_Id}:
  *  delete:
  *    tags:
  *    - tools
  *    description: Deleta uma ferramenta por sua id.
+ *    parameters:
+ *    - name: tool_Id
+ *      in: path
+ *      description: Id da ferramente a ser excluida.
+ *      required: true
+ *      type: string
+ *
  *    responses:
  *      '204':
  *        description: Ferramenta não existe mais na base.
+ *      '401':
+ *        description: Falha de autorização.
+ *    security:
+ *    - Bearer: []
  *
  */
 
@@ -139,9 +175,6 @@ export default routes;
  *          type: string
  *
  *  Session:
- *    required:
- *      - email
- *      - password
  *    type: object
  *    properties:
  *      email:
@@ -167,5 +200,16 @@ export default routes;
  *      password:
  *        type: string
  *
+ * securityDefinitions:
+ *  Bearer:
+ *    type: apiKey
+ *    in: header
+ *    name: Authorization
  *
+ *
+ *
+ *
+ * schemes:
+ *  - http
+ *  - https
  */
