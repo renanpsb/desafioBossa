@@ -15,11 +15,11 @@ class App {
   }
 
   middlewares() {
+    this.app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
     this.app.use(express.json());
   }
 
   router() {
-    this.app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
     this.app.use(routes);
   }
 }

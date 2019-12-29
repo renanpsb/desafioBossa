@@ -10,19 +10,78 @@ const swaggerOptions = {
       contact: {
         name: 'Renan Pelegrini Sebben',
       },
-      securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-        },
-      },
       servers: ['http://localhost:3000'],
     },
   },
-  apis: ['**/routes*.js'],
-  basePath: '../',
+  apis: ['**/**/routes*.js', '**/swagger*.js'],
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 module.exports = { swaggerDocs, swaggerUI };
+
+/**
+ * @swagger
+ *
+ * tags:
+ *  - name: tools
+ *  - name: users
+ *  - name: session
+ * definitions:
+ *  Tool:
+ *    required:
+ *      - title
+ *      - link
+ *      - description
+ *      - tags
+ *    type: object
+ *    properties:
+ *      title:
+ *        type: string
+ *      link:
+ *        type: string
+ *      description:
+ *        type: string
+ *      tags:
+ *        type: array
+ *        items:
+ *          type: string
+ *
+ *  Session:
+ *    type: object
+ *    properties:
+ *      email:
+ *        type: string
+ *      password:
+ *        type: string
+ *  User:
+ *    required:
+ *      - name
+ *      - email
+ *      - password
+ *      - cpf
+ *    type: object
+ *    properties:
+ *      name:
+ *        type: string
+ *      email:
+ *        type: string
+ *      telefone:
+ *        type: string
+ *      cpf:
+ *        type: string
+ *      password:
+ *        type: string
+ *
+ * securityDefinitions:
+ *  Bearer:
+ *    type: apiKey
+ *    in: header
+ *    name: Authorization
+ *
+ *
+ *
+ *
+ * schemes:
+ *  - http
+ *  - https
+ */
