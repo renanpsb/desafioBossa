@@ -19,12 +19,10 @@ module.exports = {
       cpf: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: false,
       },
       telefone: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: false,
       },
       password_hash: {
         type: Sequelize.STRING,

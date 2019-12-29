@@ -2,7 +2,7 @@
 
 import express from 'express';
 import routes from './routes';
-
+import { swaggerUI, swaggerDocs } from './config/swagger';
 import './database';
 
 class App {
@@ -19,6 +19,7 @@ class App {
   }
 
   router() {
+    this.app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
     this.app.use(routes);
   }
 }

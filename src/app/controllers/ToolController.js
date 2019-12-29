@@ -37,7 +37,7 @@ class ToolController {
   async delete(req, res) {
     await Tool.findByIdAndDelete(req.params.id);
 
-    return res.status(204).json();
+    return res.status(204).send();
   }
 }
 

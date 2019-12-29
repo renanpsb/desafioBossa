@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import mongoose from 'mongoose';
 import User from '../app/models/User';
-import databaseConfig from '../config/database';
+import { databaseConfig, urlMongo, mongoConfig } from '../config/database';
 
 const models = [User];
 
@@ -17,14 +17,7 @@ class Database {
   }
 
   mongo() {
-    this.mongoConnection = mongoose.connect(
-      'mongodb://localhost:27017/dbBossa',
-      {
-        useNewUrlParser: true,
-        useFindAndModify: true,
-        useUnifiedTopology: true,
-      },
-    );
+    this.mongoConnection = mongoose.connect(urlMongo, mongoConfig);
   }
 }
 
